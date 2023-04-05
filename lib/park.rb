@@ -12,10 +12,32 @@ class Park
     @vehicles << vehicle
     @passengers << vehicle.passengers
 
-    vehicle.passengers.map do |passenger|
-      if passenger.adult?
-        @revenue += @admission_price
+    vehicle.passengers.each do |passenger|
+      if passenger.kind_of?(Array)
+        passenger.each do |pass|
+          if pass.adult?
+            @revenue += @admission_price
+          end
+        end
+      else
+        if passenger.adult?
+          @revenue += @admission_price
+        end
       end
     end
+  end
+
+  def all_attendees
+    attendees = []
+    @passengers.each do |passenger|
+      if passenger.kind_of?(Array)
+        passenger.each do |pass|
+          attendees << pass.name
+        end
+      else 
+        attendees << passenger.name
+      end
+    end
+    attendees.sort
   end
 end

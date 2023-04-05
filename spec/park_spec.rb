@@ -43,6 +43,7 @@ RSpec.describe Park do
   it "can report revenue" do
     park1 = Park.new("Sunny Park", 10)
     vehicle = Vehicle.new("2001", "Honda", "Civic") 
+    vehicle2 = Vehicle.new("2001", "Honda", "Civic")
     charlie = Passenger.new({"name" => "Charlie", "age" => 18}) 
     jude = Passenger.new({"name" => "Jude", "age" => 20})
     taylor = Passenger.new({"name" => "Taylor", "age" => 12}) 
@@ -51,7 +52,34 @@ RSpec.describe Park do
     vehicle.add_passenger(jude)
     vehicle.add_passenger(taylor) 
 
+    vehicle2.add_passenger(charlie)
+    vehicle2.add_passenger(jude)
+    vehicle2.add_passenger(taylor)
+
     park1.add_vehicle(vehicle)
-    expect(park1.revenue).to eq 20
+    park1.add_vehicle(vehicle2)
+    expect(park1.revenue).to eq 40
+  end
+
+  it "can report all attendees names sorted" do 
+    park1 = Park.new("Sunny Park", 10)
+    vehicle = Vehicle.new("2001", "Honda", "Civic") 
+    vehicle2 = Vehicle.new("2001", "Honda", "Civic")
+    charlie = Passenger.new({"name" => "Charlie", "age" => 18}) 
+    jude = Passenger.new({"name" => "Jude", "age" => 20})
+    taylor = Passenger.new({"name" => "Taylor", "age" => 12}) 
+    
+    vehicle.add_passenger(charlie)
+    vehicle.add_passenger(jude)
+    vehicle.add_passenger(taylor) 
+
+    vehicle2.add_passenger(charlie)
+    vehicle2.add_passenger(jude)
+    vehicle2.add_passenger(taylor)
+
+    park1.add_vehicle(vehicle)
+    park1.add_vehicle(vehicle2)
+
+    expect(park1.all_attendees).to eq ["Charlie", "Charlie", "Jude", "Jude", "Taylor", "Taylor"]
   end
 end
