@@ -6,6 +6,7 @@ class Vehicle
     @model = model
     @speeding = false
     @passengers = []
+    @adults = 0
   end
 
   def speeding?
@@ -18,5 +19,14 @@ class Vehicle
 
   def add_passenger(passenger)
     @passengers << passenger
+  end
+
+  def num_adults
+    @passengers.map do |passenger|
+      if passenger.adult?
+        @adults += 1
+      end
+    end
+    @adults
   end
 end
