@@ -40,4 +40,40 @@ class Park
     end
     attendees.sort
   end
+
+  def minors
+    minors = []
+    @passengers.each do |passenger|
+      if passenger.kind_of?(Array)
+        passenger.each do |pass|
+          if !pass.adult?
+            minors << pass.name
+          end
+        end
+      else
+        if !passenger.adult?
+          minors << passenger.name
+        end
+      end
+    end
+    minors.sort
+  end
+
+  def adults
+    adults = []
+    @passengers.each do |passenger|
+      if passenger.kind_of?(Array)
+        passenger.each do |pass|
+          if pass.adult?
+            adults << pass.name
+          end
+        end
+      else
+        if passenger.adult?
+          adults << passenger.name
+        end
+      end
+    end
+    adults.sort
+  end
 end

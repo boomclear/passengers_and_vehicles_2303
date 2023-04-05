@@ -82,4 +82,48 @@ RSpec.describe Park do
 
     expect(park1.all_attendees).to eq ["Charlie", "Charlie", "Jude", "Jude", "Taylor", "Taylor"]
   end
+
+  it "can report all minors names sorted" do 
+    park1 = Park.new("Sunny Park", 10)
+    vehicle = Vehicle.new("2001", "Honda", "Civic") 
+    vehicle2 = Vehicle.new("2001", "Honda", "Civic")
+    charlie = Passenger.new({"name" => "Charlie", "age" => 18}) 
+    jude = Passenger.new({"name" => "Jude", "age" => 20})
+    taylor = Passenger.new({"name" => "Taylor", "age" => 12})
+    zion = Passenger.new({"name" => "Zion", "age" => 12}) 
+    
+    vehicle.add_passenger(charlie)
+    vehicle.add_passenger(jude)
+    vehicle.add_passenger(taylor) 
+
+    vehicle2.add_passenger(charlie)
+    vehicle2.add_passenger(jude)
+    vehicle2.add_passenger(zion)
+
+    park1.add_vehicle(vehicle)
+    park1.add_vehicle(vehicle2)
+    expect(park1.minors).to eq ["Taylor", "Zion"]
+  end
+
+  it "can report all adults names sorted" do 
+    park1 = Park.new("Sunny Park", 10)
+    vehicle = Vehicle.new("2001", "Honda", "Civic") 
+    vehicle2 = Vehicle.new("2001", "Honda", "Civic")
+    charlie = Passenger.new({"name" => "Charlie", "age" => 18}) 
+    jude = Passenger.new({"name" => "Jude", "age" => 20})
+    taylor = Passenger.new({"name" => "Taylor", "age" => 12})
+    zion = Passenger.new({"name" => "Zion", "age" => 12}) 
+    
+    vehicle.add_passenger(charlie)
+    vehicle.add_passenger(jude)
+    vehicle.add_passenger(taylor) 
+
+    vehicle2.add_passenger(charlie)
+    vehicle2.add_passenger(jude)
+    vehicle2.add_passenger(zion)
+
+    park1.add_vehicle(vehicle)
+    park1.add_vehicle(vehicle2)
+    expect(park1.adults).to eq ["Charlie", "Charlie", "Jude", "Jude"]
+  end
 end
