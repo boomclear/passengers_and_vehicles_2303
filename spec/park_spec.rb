@@ -15,4 +15,12 @@ RSpec.describe Park do
     expect(park1.name).to eq "Sunny Park"
     expect(park1.admission_price).to eq 10
   end
+
+  it "can add vehicles to park" do 
+    park1 = Park.new("Sunny Park", 10)
+    vehicle = Vehicle.new("2001", "Honda", "Civic") 
+
+    park1.add_vehicle(vehicle)
+    expect(park1.vehicles).to eq [vehicle]
+  end
 end
